@@ -1,6 +1,7 @@
 "use client";
 
 import ClientForm from "./_components/ClientForm";
+import Footer from "./_components/Footer";
 import Navbar from "./_components/Header";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div className="flex h-full w-full flex-col items-center justify-center">
       <Navbar />
       <ClientForm />
+      <Footer />
     </div>
   );
 };
