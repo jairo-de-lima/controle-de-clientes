@@ -1,11 +1,14 @@
-import React from "react";
-import ClientForm from "./_components/ClientForm";
+"use client";
 
-const Home: React.FC = () => {
+import ClientForm from "./_components/ClientForm";
+import Navbar from "./_components/Navbar";
+
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      <Navbar />
       <ClientForm />
-    </main>
+    </div>
   );
 };
 
