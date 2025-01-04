@@ -33,7 +33,6 @@ const formSchema = z.object({
   suframa: z.string().min(1, "Suframa é obrigatório"),
   email: z.string().email("Email inválido"),
 });
-
 const ClientForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -215,7 +214,42 @@ const ClientForm = () => {
       </CardContent>
       <CardFooter />
     </Card>
+    // <Card className="p-6">
+    //   <CardTitle className="mb-4 text-lg font-bold">
+    //     Cadastro de Clientes
+    //   </CardTitle>
+    //   <CardContent>
+    //     <form className="space-y-6">
+    //       {[
+    //         { name: "cliente", label: "Nome do Cliente" },
+    //         { name: "endereco", label: "Endereço" },
+    //         { name: "documento", label: "CNPJ ou CPF" },
+    //         { name: "fornecedor", label: "Fornecedor" },
+    //         { name: "transportadora", label: "Transportadora" },
+    //         { name: "telefoneResidencial", label: "Telefone Residencial" },
+    //         { name: "celular", label: "Celular" },
+    //       ].map((field) => (
+    //         <div key={field.name} className="flex flex-col">
+    //           <label className="mb-1 text-sm font-semibold text-gray-700">
+    //             {field.label}
+    //           </label>
+    //           <Input
+    //             className="rounded border p-2"
+    //             type="text"
+    //             {...register(field.name)}
+    //           />
+    //           {/* {errors[field.name] && <p className="text-red-500 text-xs mt-1">{errors[field.name].message.toString()}</p>} */}
+    //         </div>
+    //       ))}
+    //       <Button
+    //         className="mt-4 rounded bg-blue-500 p-2 text-white"
+    //         type="submit"
+    //       >
+    //         Cadastrar
+    //       </Button>
+    //     </form>
+    //   </CardContent>
+    // </Card>
   );
 };
-
 export default ClientForm;
