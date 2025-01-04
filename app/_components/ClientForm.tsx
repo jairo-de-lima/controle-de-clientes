@@ -1,8 +1,8 @@
 "use client";
-
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -11,81 +11,113 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
-import { z } from "zod";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation"; // Para redirecionar ou atualizar a página após o envio
 
-// Definir o esquema de validação com Zod
+import { z } from "zod";
+import { useToast } from "../_hooks/use-toast";
+
 const formSchema = z.object({
-  cliente: z.string().min(1, "Nome do Cliente é obrigatório"),
-  endereco: z.string().min(1, "Endereço é obrigatório"),
-  documento: z.number().min(1, "CNPJ ou CPF é obrigatório"),
-  fornecedor: z.string().min(1, "Fornecedor é obrigatório"),
-  transportadora: z.string().min(1, "Transportadora é obrigatória"),
-  telefoneResidencial: z.number().min(1, "Telefone Residencial é obrigatório"),
-  celular: z.number().min(1, "Celular é obrigatório"),
-  suframa: z.string().min(1, "Suframa é obrigatório"),
+  cliente: z.string().min(2, "Nome deve ter no mínimo 2 caracteres"),
+  endereco: z.string().min(5, "Endereço deve ter no mínimo 5 caracteres"),
+  documento: z.string().min(11, "Documento deve ter no mínimo 11 caracteres"),
+  fornecedor: z
+    .string()
+    .min(2, "Nome do fornecedor deve ter no mínimo 2 caracteres"),
+  transportadora: z
+    .string()
+    .min(2, "Nome da transportadora deve ter no mínimo 2 caracteres"),
+  telefoneResidencial: z
+    .string()
+    .min(10, "Telefone deve ter no mínimo 10 caracteres")
+    .nullish()
+    .or(z.string().length(0)),
+  celular: z.string().min(11, "Celular deve ter no mínimo 11 caracteres"),
+  suframa: z.string().optional().nullable(),
   email: z.string().email("Email inválido"),
 });
 
 const ClientForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       cliente: "",
       endereco: "",
-      documento: 0,
+      documento: "",
       fornecedor: "",
       transportadora: "",
-      telefoneResidencial: 0,
-      celular: 0,
+      telefoneResidencial: "",
+      celular: "",
       suframa: "",
       email: "",
     },
   });
 
-  const router = useRouter(); // Hook do Next.js para manipulação de rotas
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+
     try {
       const response = await fetch("/api/clientes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          documento: values.documento.replace(/\D/g, ""),
+          telefoneResidencial:
+            values.telefoneResidencial && values.telefoneResidencial.length > 0
+              ? values.telefoneResidencial.replace(/\D/g, "")
+              : null,
+          celular: values.celular.replace(/\D/g, ""),
+          suframa: values.suframa || null,
+        }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const error = await response.json();
-        console.error("Erro ao enviar cliente:", error);
-        return;
+        throw new Error(
+          data.error || data.details || "Erro ao cadastrar cliente",
+        );
       }
 
-      console.log("Cliente cadastrado com sucesso");
-      form.reset(); // Reseta o formulário
-      router.refresh(); // Atualiza a página ou redireciona
+      toast({
+        title: "Cliente cadastrado!",
+        description: "O cliente foi cadastrado com sucesso.",
+        variant: "default",
+        className: "bg-green-500 text-white",
+      });
+
+      form.reset();
+      router.refresh();
     } catch (error) {
-      console.error("Erro ao enviar cliente:", error);
+      console.error("Erro:", error);
+
+      toast({
+        title: "Erro ao cadastrar",
+        description:
+          error instanceof Error ? error.message : "Erro ao cadastrar cliente",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <Card className="mt-12 w-[90%]">
+    <Card className="mx-auto mt-12 w-[90%] max-w-2xl">
       <CardHeader>
         <CardTitle>Cadastro de clientes</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="cliente"
@@ -93,7 +125,7 @@ const ClientForm = () => {
                 <FormItem>
                   <FormLabel>Cliente</FormLabel>
                   <FormControl>
-                    <Input placeholder="cliente" {...field} />
+                    <Input placeholder="Nome do cliente" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -121,7 +153,7 @@ const ClientForm = () => {
                 <FormItem>
                   <FormLabel>CPF/CNPJ</FormLabel>
                   <FormControl>
-                    <Input placeholder="cpf/ cnpj" {...field} />
+                    <Input placeholder="CPF/CNPJ" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,9 +165,9 @@ const ClientForm = () => {
               name="endereco"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Endereco</FormLabel>
+                  <FormLabel>Endereço</FormLabel>
                   <FormControl>
-                    <Input placeholder="Endereco" {...field} />
+                    <Input placeholder="Endereço" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -149,7 +181,7 @@ const ClientForm = () => {
                 <FormItem>
                   <FormLabel>Fornecedor</FormLabel>
                   <FormControl>
-                    <Input placeholder="fornecedor" {...field} />
+                    <Input placeholder="Fornecedor" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -163,20 +195,25 @@ const ClientForm = () => {
                 <FormItem>
                   <FormLabel>Transportadora</FormLabel>
                   <FormControl>
-                    <Input placeholder="transportadora" {...field} />
+                    <Input placeholder="Transportadora" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="telefoneResidencial"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone Residencial</FormLabel>
+                  <FormLabel>Telefone Residencial (Opcional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Telefone Residencial" {...field} />
+                    <Input
+                      placeholder="Telefone Residencial"
+                      {...field}
+                      value={field.value ?? ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -204,18 +241,23 @@ const ClientForm = () => {
                 <FormItem>
                   <FormLabel>Suframa</FormLabel>
                   <FormControl>
-                    <Input placeholder="Suframa" {...field} />
+                    <Input
+                      placeholder="Suframa"
+                      {...field}
+                      value={field.value ?? ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit">Enviar</Button>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Enviando..." : "Cadastrar Cliente"}
+            </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter />
     </Card>
   );
 };

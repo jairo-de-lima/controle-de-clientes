@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "./_components/ui/toaster";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -18,7 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${mulish.className} dark antialiased`}>{children}</body>
+      <body className={`${mulish.className} dark antialiased`}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }

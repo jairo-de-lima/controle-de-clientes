@@ -8,18 +8,18 @@ datasource db {
 }
 
 model Cliente {
-  id                 String   @id @default(uuid())
-  cliente            String
-  endereco           String
-  documento          BigInt
-  fornecedor         String
-  transportadora     String
-  telefoneResidencial BigInt
-  celular            BigInt
-  suframa            String
-  email              String   @unique
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                 String   @id @default(cuid())
+  cliente           String
+  endereco          String
+  documento         String   @unique
+  fornecedor        String
+  transportadora    String
+  telefoneResidencial String? // Agora é opcional
+  celular           String
+  suframa           String?
+  email             String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  @@map("clientes")
+  @@map("cliente")
 }
