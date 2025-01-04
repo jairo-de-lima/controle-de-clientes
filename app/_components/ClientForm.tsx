@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +21,7 @@ import {
 import { Input } from "./ui/input";
 import { z } from "zod";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation"; // Para redirecionar ou atualizar a página após o envio
 
 // Definir o esquema de validação com Zod
 const formSchema = z.object({
@@ -50,11 +52,32 @@ const ClientForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  const router = useRouter(); // Hook do Next.js para manipulação de rotas
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch("/api/clientes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("Erro ao enviar cliente:", error);
+        return;
+      }
+
+      console.log("Cliente cadastrado com sucesso");
+      form.reset(); // Reseta o formulário
+      router.refresh(); // Atualiza a página ou redireciona
+    } catch (error) {
+      console.error("Erro ao enviar cliente:", error);
+    }
   }
+
   return (
     <Card className="mt-12 w-[90%]">
       <CardHeader>
@@ -187,50 +210,13 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
+
+            <Button type="submit">Enviar</Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter>
-        <Button type="submit">Enviar</Button>
-      </CardFooter>
+      <CardFooter />
     </Card>
-    // <Card className="p-6">
-    //   <CardTitle className="mb-4 text-lg font-bold">
-    //     Cadastro de Clientes
-    //   </CardTitle>
-    //   <CardContent>
-    //     <form className="space-y-6">
-    //       {[
-    //         { name: "cliente", label: "Nome do Cliente" },
-    //         { name: "endereco", label: "Endereço" },
-    //         { name: "documento", label: "CNPJ ou CPF" },
-    //         { name: "fornecedor", label: "Fornecedor" },
-    //         { name: "transportadora", label: "Transportadora" },
-    //         { name: "telefoneResidencial", label: "Telefone Residencial" },
-    //         { name: "celular", label: "Celular" },
-    //       ].map((field) => (
-    //         <div key={field.name} className="flex flex-col">
-    //           <label className="mb-1 text-sm font-semibold text-gray-700">
-    //             {field.label}
-    //           </label>
-    //           <Input
-    //             className="rounded border p-2"
-    //             type="text"
-    //             {...register(field.name)}
-    //           />
-    //           {/* {errors[field.name] && <p className="text-red-500 text-xs mt-1">{errors[field.name].message.toString()}</p>} */}
-    //         </div>
-    //       ))}
-
-    //       <Button
-    //         className="mt-4 rounded bg-blue-500 p-2 text-white"
-    //         type="submit"
-    //       >
-    //         Cadastrar
-    //       </Button>
-    //     </form>
-    //   </CardContent>
-    // </Card>
   );
 };
 
