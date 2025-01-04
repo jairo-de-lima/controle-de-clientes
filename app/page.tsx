@@ -1,5 +1,5 @@
 import React from "react";
-import ClientForm from "./_components/ClientForm"; // Certifique-se de que o caminho está correto
+import ClientForm from "./_components/ClientForm";
 
 const Home: React.FC = () => {
   return (
