@@ -28,7 +28,7 @@ const ClientForm = () => {
   });
 
   return (
-    <Card className="p-6">
+    <Card className="mx-auto w-full max-w-2xl p-6">
       <CardTitle className="mb-4 text-lg font-bold">
         Cadastro de Clientes
       </CardTitle>
@@ -42,6 +42,7 @@ const ClientForm = () => {
             { name: "transportadora", label: "Transportadora" },
             { name: "telefoneResidencial", label: "Telefone Residencial" },
             { name: "celular", label: "Celular" },
+            { name: "Suframa", label: "Suframa" },
           ].map((field) => (
             <div key={field.name} className="flex flex-col">
               <label className="mb-1 text-sm font-semibold text-gray-700">
