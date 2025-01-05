@@ -2,7 +2,7 @@
 
 import ClientForm from "./_components/ClientForm";
 import Footer from "./_components/Footer";
-import Navbar from "./_components/Header";
+import Navbar from "./_components/Navbar";
 
 const Home = () => {
   return (
