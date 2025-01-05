@@ -121,9 +121,9 @@ const ClientForm = () => {
   }
 
   return (
-    <Card className="mx-auto mt-12 w-[90%] max-w-2xl">
+    <Card className="bg-pink mx-auto mt-12 w-[90%] max-w-2xl">
       <CardHeader>
-        <CardTitle>Cadastro de clientes</CardTitle>
+        <CardTitle className="text-black">Cadastro de clientes</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -148,7 +148,7 @@ const ClientForm = () => {
               name="cliente"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Cliente</FormLabel>
+                  <FormLabel className="text-black">Cliente</FormLabel>
                   <FormControl>
                     <Input placeholder="Nome do cliente" {...field} />
                   </FormControl>
@@ -161,7 +161,7 @@ const ClientForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel className="text-black">E-mail</FormLabel>
                   <FormControl>
                     <Input placeholder="E-mail" {...field} />
                   </FormControl>
@@ -174,7 +174,7 @@ const ClientForm = () => {
               name="documento"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>CPF/CNPJ</FormLabel>
+                  <FormLabel className="text-black">CPF/CNPJ</FormLabel>
                   <FormControl>
                     <Input placeholder="CPF/CNPJ" {...field} />
                   </FormControl>
@@ -187,7 +187,7 @@ const ClientForm = () => {
               name="endereco"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Endereço</FormLabel>
+                  <FormLabel className="text-black">Endereço</FormLabel>
                   <FormControl>
                     <Input placeholder="Endereço" {...field} />
                   </FormControl>
@@ -248,7 +248,7 @@ const ClientForm = () => {
               name="fornecedor"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Fornecedor</FormLabel>
+                  <FormLabel className="text-black">Fornecedor</FormLabel>
                   <FormControl>
                     <Input placeholder="Fornecedor" {...field} />
                   </FormControl>
@@ -261,7 +261,7 @@ const ClientForm = () => {
               name="transportadora"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Transportadora</FormLabel>
+                  <FormLabel className="text-black">Transportadora</FormLabel>
                   <FormControl>
                     <Input placeholder="Transportadora" {...field} />
                   </FormControl>
@@ -274,7 +274,9 @@ const ClientForm = () => {
               name="telefoneResidencial"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone Residencial (Opcional)</FormLabel>
+                  <FormLabel className="text-black">
+                    Telefone Residencial (Opcional)
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Telefone Residencial"
@@ -291,7 +293,7 @@ const ClientForm = () => {
               name="celular"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Celular</FormLabel>
+                  <FormLabel className="text-black">Celular</FormLabel>
                   <FormControl>
                     <Input placeholder="Celular" {...field} />
                   </FormControl>
@@ -304,7 +306,7 @@ const ClientForm = () => {
               name="suframa"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Suframa</FormLabel>
+                  <FormLabel className="text-black">Suframa</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Suframa"

@@ -14,4 +14,5 @@ const Suplier = () => {
   );
 };
 
+//Fornecedor
 export default Suplier;

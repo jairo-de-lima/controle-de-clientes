@@ -29,6 +29,30 @@
     --input: 316 20% 20%;
     --ring: 316 73% 52%;
     --radius: 0.5rem;
+
+    /* Novas cores adicionadas */
+    --pink-light: 330 100% 95%;
+    --pink: 330 100% 85%;
+    --pink-dark: 330 100% 75%;
+
+    --gray-light: 0 0% 95%;
+    --gray: 0 0% 75%;
+    --gray-dark: 0 0% 50%;
+
+    --white: 0 0% 100%;
+    --off-white: 0 0% 98%;
+
+    --blue-light: 210 100% 95%;
+    --blue: 210 100% 85%;
+    --blue-dark: 210 100% 75%;
+
+    --purple-light: 270 100% 95%;
+    --purple: 270 100% 85%;
+    --purple-dark: 270 100% 75%;
+
+    --mint-light: 150 100% 95%;
+    --mint: 150 100% 85%;
+    --mint-dark: 150 100% 75%;
   }
 
   .dark {
@@ -49,7 +73,78 @@
     --border: 316 20% 20%;
     --input: 316 20% 20%;
     --ring: 316 73% 52%;
+
+    /* Novas cores adicionadas */
+    --pink-light: 330 100% 95%;
+    --pink: 330 100% 85%;
+    --pink-dark: 330 100% 75%;
+
+    --gray-light: 0 0% 95%;
+    --gray: 0 0% 75%;
+    --gray-dark: 0 0% 50%;
+
+    --white: 0 0% 100%;
+    --off-white: 0 0% 98%;
+
+    --blue-light: 210 100% 95%;
+    --blue: 210 100% 85%;
+    --blue-dark: 210 100% 75%;
+
+    --purple-light: 270 100% 95%;
+    --purple: 270 100% 85%;
+    --purple-dark: 270 100% 75%;
+
+    --mint-light: 150 100% 95%;
+    --mint: 150 100% 85%;
+    --mint-dark: 150 100% 75%;
   }
+
+  /* Definir classes CSS para todas as cores */
+  .bg-pink-light { background-color: hsl(var(--pink-light)); }
+  .bg-pink { background-color: hsl(var(--pink)); }
+  .bg-pink-dark { background-color: hsl(var(--pink-dark)); }
+
+  .bg-gray-light { background-color: hsl(var(--gray-light)); }
+  .bg-gray { background-color: hsl(var(--gray)); }
+  .bg-gray-dark { background-color: hsl(var(--gray-dark)); }
+
+  .bg-white { background-color: hsl(var(--white)); }
+  .bg-off-white { background-color: hsl(var(--off-white)); }
+
+  .bg-blue-light { background-color: hsl(var(--blue-light)); }
+  .bg-blue { background-color: hsl(var(--blue)); }
+  .bg-blue-dark { background-color: hsl(var(--blue-dark)); }
+
+  .bg-purple-light { background-color: hsl(var(--purple-light)); }
+  .bg-purple { background-color: hsl(var(--purple)); }
+  .bg-purple-dark { background-color: hsl(var(--purple-dark)); }
+
+  .bg-mint-light { background-color: hsl(var(--mint-light)); }
+  .bg-mint { background-color: hsl(var(--mint)); }
+  .bg-mint-dark { background-color: hsl(var(--mint-dark)); }
+
+  .text-pink-light { color: hsl(var(--pink-light)); }
+  .text-pink { color: hsl(var(--pink)); }
+  .text-pink-dark { color: hsl(var(--pink-dark)); }
+
+  .text-gray-light { color: hsl(var(--gray-light)); }
+  .text-gray { color: hsl(var(--gray)); }
+  .text-gray-dark { color: hsl(var(--gray-dark)); }
+
+  .text-white { color: hsl(var(--white)); }
+  .text-off-white { color: hsl(var(--off-white)); }
+
+  .text-blue-light { color: hsl(var(--blue-light)); }
+  .text-blue { color: hsl(var(--blue)); }
+  .text-blue-dark { color: hsl(var(--blue-dark)); }
+
+  .text-purple-light { color: hsl(var(--purple-light)); }
+  .text-purple { color: hsl(var(--purple)); }
+  .text-purple-dark { color: hsl(var(--purple-dark)); }
+
+  .text-mint-light { color: hsl(var(--mint-light)); }
+  .text-mint { color: hsl(var(--mint)); }
+  .text-mint-dark { color: hsl(var(--mint-dark)); }
 
   * {
     @apply border-border;
