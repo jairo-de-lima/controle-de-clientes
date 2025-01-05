@@ -36,6 +36,11 @@ const formSchema = z.object({
   celular: z.string().min(11, "Celular deve ter no mínimo 11 caracteres"),
   suframa: z.string().optional().nullable(),
   email: z.string().email("Email inválido"),
+  // codigoCliente: z.string().optional().nullable(), // Comentado até atualizar o banco de dados
+  // bairro: z.string().optional().nullable(), // Comentado até atualizar o banco de dados
+  // estado: z.string().optional().nullable(), // Comentado até atualizar o banco de dados
+  // inscricaoEstadual: z.string().optional().nullable(), // Comentado até atualizar o banco de dados
+  // cidade: z.string().optional().nullable(), // Comentado até atualizar o banco de dados
 });
 
 const ClientForm = () => {
@@ -55,6 +60,11 @@ const ClientForm = () => {
       celular: "",
       suframa: "",
       email: "",
+      // codigoCliente: "", // Comentado até atualizar o banco de dados
+      // bairro: "", // Comentado até atualizar o banco de dados
+      // estado: "", // Comentado até atualizar o banco de dados
+      // inscricaoEstadual: "", // Comentado até atualizar o banco de dados
+      // cidade: "", // Comentado até atualizar o banco de dados
     },
   });
 
@@ -118,6 +128,21 @@ const ClientForm = () => {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {/* Código do Cliente - Comentado até atualizar o banco de dados */}
+            {/*
+            <FormField
+              control={form.control}
+              name="codigoCliente"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Código do Cliente</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Código do Cliente" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
             <FormField
               control={form.control}
               name="cliente"
@@ -131,7 +156,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="email"
@@ -145,7 +169,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="documento"
@@ -159,7 +182,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="endereco"
@@ -173,7 +195,54 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
+            {/* Bairro - Comentado até atualizar o banco de dados */}
+            {/*
+            <FormField
+              control={form.control}
+              name="bairro"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bairro</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Bairro" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+            {/* Estado - Comentado até atualizar o banco de dados
+            <FormField control={form.control} 
+            name="estado" 
+            render={({ field }) => ( 
+            <FormItem> 
+            <FormLabel>Estado</FormLabel> 
+            <FormControl> 
+            <Input placeholder="Estado" {...field} />
+             </FormControl>
+              <FormMessage /> 
+              </FormItem> )} /> */}
+            {/* Cidade - Comentado até atualizar o banco de dados */}{" "}
+            {/* <FormField control={form.control} 
+               name="cidade" 
+               render={({ field }) => ( 
+               <FormItem> 
+               <FormLabel>Cidade</FormLabel> 
+               <FormControl> 
+               <Input placeholder="Cidade" {...field} /> 
+               </FormControl> 
+               <FormMessage /> 
+               </FormItem> )} /> */}
+            {/* Inscrição Estadual - Comentado até atualizar o banco de dados */}
+            {/* <FormField control={form.control} 
+               name="inscricaoEstadual" 
+               render={({ field }) => ( 
+               <FormItem>
+               <FormLabel>Inscrição Estadual</FormLabel>
+               <FormControl> 
+               <Input placeholder="Inscrição Estadual" {...field} />
+               </FormControl>
+               <FormMessage /> 
+               </FormItem> )} /> */}
             <FormField
               control={form.control}
               name="fornecedor"
@@ -187,7 +256,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="transportadora"
@@ -201,7 +269,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="telefoneResidencial"
@@ -219,7 +286,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="celular"
@@ -233,7 +299,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="suframa"
@@ -251,7 +316,6 @@ const ClientForm = () => {
                 </FormItem>
               )}
             />
-
             <Button type="submit" className="w-full" disabled={isSubmitting}>
               {isSubmitting ? "Enviando..." : "Cadastrar Cliente"}
             </Button>
