@@ -1,0 +1,17 @@
+[33m171f1c4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcontrole-de-clientes-branch[m[33m, [m[1;31morigin/controle-de-clientes-branch[m[33m)[m feat: merge with partner's repository and add local files
+[33m9ab16e8[m feat: update global styles, layout, and component configuration
+[33med9624d[m feat: return repo
+[33m0aee7bb[m feat: add form components and integrate client-side form handling
+[33m6e22dd2[m feat: adjust navbar
+[33mec3cfd4[m feat: add 'use client' directive to ClientForm component and reset the project
+[33m61ef61c[m feat: add components and validation setup - add Input, Card, Form, and Button components from ShadCN - add zod and react-hook-form packages for form validation and management - add ClientForm component to Home page (page.tsx) for rendering
+[33m01b2582[m feat: Implement Prisma integration with Cliente model and API routes for CRUD operations
+[33m9989ac6[m feat: adjust navbar
+[33m97aa820[m feat: Add Footer component and update layout with new font and metadata
+[33mb4cf701[m feat: Add utility functions and UI components with Tailwind CSS integration
+[33mbe4b5e2[m feat: Add new components and update dependencies for improved UI
+[33m31de1e0[m feat: add Mulish font, dark theme, and Suframa field in ClientForm
+[33maac55ed[m feat: add 'use client' directive to ClientForm component and reset the project
+[33mfa7c7e6[m feat: add components and validation setup - add Input, Card, Form, and Button components from ShadCN - add zod and react-hook-form packages for form validation and management - add ClientForm component to Home page (page.tsx) for rendering
+[33m9b3355d[m[33m ([m[1;32mmaster[m[33m)[m feat: Add Husky and lint-staged configuration for pre-commit hooks
+[33m9558d94[m Initial commit from Create Next App

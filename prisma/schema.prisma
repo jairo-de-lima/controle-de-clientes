@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Ajuste para o banco que está usando
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id                 String   @id @default(cuid())
+  cliente           String
+  endereco          String
+  documento         String   @unique
+  fornecedor        String
+  transportadora    String
+  telefoneResidencial String? // Agora é opcional
+  celular           String
+  suframa           String?
+  email             String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("cliente")
+}
